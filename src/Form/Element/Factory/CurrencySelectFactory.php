@@ -2,7 +2,7 @@
 
 namespace ZFBrasil\DoctrineMoneyModule\Form\Element\Factory;
 
-use Zend\Form\FormElementManager;
+use Interop\Container\ContainerInterface;
 use ZFBrasil\DoctrineMoneyModule\Form\Element\CurrencySelect;
 use InvalidArgumentException;
 
@@ -13,14 +13,13 @@ use InvalidArgumentException;
 class CurrencySelectFactory
 {
     /**
-     * @param FormElementManager $formElementManager
+     * @param ContainerInterface $container
      *
      * @return CurrencySelect
      */
-    public function __invoke(FormElementManager $formElementManager)
+    public function __invoke(ContainerInterface $container)
     {
-        $serviceManager = $formElementManager->getServiceLocator();
-        $config = $serviceManager->get('Config');
+        $config = $container->get('Config');
 
         if (!isset($config['money']['currencies'])) {
             throw new InvalidArgumentException('Couldn\'t find currencies configuration.');

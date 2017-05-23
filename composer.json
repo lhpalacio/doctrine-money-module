@@ -1,6 +1,6 @@
 {
     "name": "zfbrasil/doctrine-money-module",
-    "description": "Provide ZF2 integration between doctrine and mathiasverraes/money",
+    "description": "Provide ZF integration between doctrine and mathiasverraes/money",
     "license": "MIT",
     "authors": [
         {
@@ -23,13 +23,13 @@
         "doctrine/mongodb-odm": "^1.0"
     },
     "require": {
-        "php": "^5.5 || ^7.0",
-        "doctrine/doctrine-module": "^0.8 || ^1.0",
+        "php": "^5.6 || ^7.0",
+        "doctrine/doctrine-module": "^0.9 || ^1.2",
         "zendframework/zend-form": "^2.3",
         "zendframework/zend-filter": "^2.3",
         "zendframework/zend-validator": "^2.3",
         "zendframework/zend-view": "^2.3",
-        "zendframework/zend-servicemanager": "^2.3",
+        "zendframework/zend-servicemanager": "^2.3 || ^3.3",
         "zendframework/zend-modulemanager": "^2.3",
         "zendframework/zend-i18n": "^2.3",
         "mathiasverraes/money": "^1.2"

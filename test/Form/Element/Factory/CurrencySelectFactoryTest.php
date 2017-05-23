@@ -2,10 +2,9 @@
 
 namespace ZFBrasil\Test\DoctrineMoneyModule\Form\Element\Factory;
 
+use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\FormElementManager;
-use Zend\ServiceManager\Config;
-use Zend\ServiceManager\ServiceManager;
+use Prophecy\Prophecy\ObjectProphecy;
 use ZFBrasil\DoctrineMoneyModule\Form\Element\Factory\CurrencySelectFactory;
 use ZFBrasil\DoctrineMoneyModule\Form\Element\CurrencySelect;
 
@@ -15,10 +14,8 @@ use ZFBrasil\DoctrineMoneyModule\Form\Element\CurrencySelect;
  */
 class CurrencySelectFactoryTest extends TestCase
 {
-    /**
-     * @var ServiceManager
-     */
-    private $serviceManager;
+    /** @var ContainerInterface|ObjectProphecy */
+    private $container;
 
     private $config = [
         'money' => [
@@ -29,47 +26,39 @@ class CurrencySelectFactoryTest extends TestCase
         ],
     ];
 
-    public function setUp()
+    protected function setUp()
     {
-        $this->serviceManager = new ServiceManager(new Config($this->config));
+        $this->container = $this->prophesize(ContainerInterface::class);
     }
 
     public function testFactoryCanCreateElement()
     {
+        $this->container->get('Config')->willReturn($this->config);
+
         $factory = new CurrencySelectFactory();
-        $this->serviceManager->setService('Config', $this->config);
+        $currencySelect = $factory($this->container->reveal());
 
-        $formElementManager = $this->getMock(FormElementManager::class);
-        $formElementManager->expects($this->once())->method('getServiceLocator')->willReturn($this->serviceManager);
-
-        $this->assertInstanceOf(CurrencySelect::class, $factory($formElementManager));
+        $this->assertInstanceOf(CurrencySelect::class, $currencySelect);
     }
 
     public function testFactoryCreateElementWithExpectedCurrencies()
     {
+        $this->container->get('Config')->willReturn($this->config);
+
         $factory = new CurrencySelectFactory();
-        $this->serviceManager->setService('Config', $this->config);
-
-        $formElementManager = $this->getMock(FormElementManager::class);
-        $formElementManager->expects($this->once())->method('getServiceLocator')->willReturn($this->serviceManager);
-
-        /* @var CurrencySelect $currencySelect */
-        $currencySelect = $factory($formElementManager);
+        $currencySelect = $factory($this->container->reveal());
 
         $this->assertEquals($this->config['money']['currencies'], $currencySelect->getValueOptions());
     }
 
     public function testFactoryCreateElementsWithNoCurrenciesShouldTrownAnException()
     {
-        $factory = new CurrencySelectFactory();
-        $this->serviceManager->setService('Config', []);
+        $this->container->get('Config')->willReturn(false);
 
-        $formElementManager = $this->getMock(FormElementManager::class);
-        $formElementManager->expects($this->once())->method('getServiceLocator')->willReturn($this->serviceManager);
+        $factory = new CurrencySelectFactory();
 
         $this->setExpectedException('InvalidArgumentException');
 
-        /* @var CurrencySelect $currencySelect */
-        $factory($formElementManager);
+        $factory($this->container->reveal());
     }
 }

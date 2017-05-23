@@ -2,10 +2,8 @@
 
 namespace ZFBrasil\Test\DoctrineMoneyModule\Form;
 
-use Money\Currency;
 use Money\Money;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\FormElementManager;
 use ZFBrasil\DoctrineMoneyModule\Form\Factory\MoneyFieldsetFactory;
 use ZFBrasil\DoctrineMoneyModule\Form\MoneyFieldset;
 
@@ -34,9 +32,8 @@ class MoneyFieldsetTest extends TestCase
     private function getMoneyFieldset()
     {
         $factory = new MoneyFieldsetFactory();
-        $formManager = $this->getMock(FormElementManager::class);
 
-        return $factory($formManager);
+        return $factory();
     }
 
     public function testCanHydrateMoneyWithString()

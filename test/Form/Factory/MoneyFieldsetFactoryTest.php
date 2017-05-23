@@ -3,7 +3,6 @@
 namespace ZFBrasil\Test\DoctrineMoneyModule\Form\Factory;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Form\FormElementManager;
 use ZFBrasil\DoctrineMoneyModule\Form\Factory\MoneyFieldsetFactory;
 use ZFBrasil\DoctrineMoneyModule\Form\MoneyFieldset;
 use Money\Money;
@@ -23,9 +22,8 @@ class MoneyFieldsetFactoryTest extends TestCase
     public function setUp()
     {
         $factory = new MoneyFieldsetFactory();
-        $formManager = $this->getMock(FormElementManager::class);
 
-        $this->fieldset = $factory($formManager);
+        $this->fieldset = $factory();
     }
 
     public function testFactoryCanInstantiateFieldset()

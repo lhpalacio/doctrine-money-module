@@ -8,12 +8,11 @@ use Money\Money;
 use Money\InvalidArgumentException;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
-use Zend\Form\FormElementManager;
-use Zend\Stdlib\Hydrator\ClassMethods;
+use Zend\Hydrator\ClassMethods;
 use ZFBrasil\DoctrineMoneyModule\Form\Factory\MoneyFieldsetFactory;
 use ZFBrasil\DoctrineMoneyModule\Form\MoneyFieldset;
 use ZFBrasil\Test\DoctrineMoneyModule\TestAsset\Model\HasMoneyPropertyModel;
-use Zend\Stdlib\Hydrator\ObjectProperty;
+use Zend\Hydrator\ObjectProperty;
 
 /**
  * Test to see if Form returns a valid object on getData.
@@ -29,9 +28,8 @@ class FormIntegrationTest extends TestCase
     private function getMoneyFieldset()
     {
         $factory = new MoneyFieldsetFactory();
-        $formManager = $this->getMock(FormElementManager::class);
 
-        return $factory($formManager);
+        return $factory();
     }
 
     public function testElementDirectlyInTheForm()
