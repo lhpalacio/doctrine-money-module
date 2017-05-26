@@ -2,7 +2,7 @@
 
 namespace ZFBrasil\Test\DoctrineMoneyModule\Form\Element\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase as TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use ZFBrasil\DoctrineMoneyModule\Form\Element\Factory\CurrencySelectFactory;

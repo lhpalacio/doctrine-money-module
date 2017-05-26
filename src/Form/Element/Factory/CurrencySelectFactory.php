@@ -2,7 +2,7 @@
 
 namespace ZFBrasil\DoctrineMoneyModule\Form\Element\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use ZFBrasil\DoctrineMoneyModule\Form\Element\CurrencySelect;
 use InvalidArgumentException;
 
