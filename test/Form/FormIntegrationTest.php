@@ -5,7 +5,6 @@ namespace ZFBrasil\Test\DoctrineMoneyModule\Form;
 use StdClass;
 use PHPUnit_Framework_TestCase as TestCase;
 use Money\Money;
-use Money\InvalidArgumentException;
 use Zend\Form\Form;
 use Zend\Form\Fieldset;
 use Zend\Hydrator\ClassMethods;
@@ -108,7 +107,7 @@ class FormIntegrationTest extends TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
+     * @expectedException \Money\InvalidArgumentException
      * @expectedExceptionMessage The value could not be parsed as money
      */
     public function testValueCouldNotBeParsedAsMoney()

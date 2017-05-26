@@ -2,13 +2,10 @@ language: php
 
 php:
     - 5.6
-    - 7.0
-  
-before_script:
-  - echo "extension = mongo.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-    
+    - 7
+
 script:
-    - composer install --prefer-source
+    - composer install --prefer-dist --ignore-platform-reqs
     - vendor/bin/phpunit --coverage-clover ./build/logs/clover.xml
     - vendor/bin/php-cs-fixer fix -v --fixers=-empty_return --diff --dry-run ./src
     - vendor/bin/php-cs-fixer fix -v --fixers=-empty_return --diff --dry-run ./test
